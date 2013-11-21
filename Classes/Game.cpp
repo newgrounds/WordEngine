@@ -69,6 +69,7 @@ bool Game::init()
                 Letter l = row[j];
                 if (location.getDistance(l.posn) < 30) {
                     log("touched %c", l.letter);
+                    
                     return true;
                 }
             }

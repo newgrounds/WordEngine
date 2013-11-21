@@ -8,6 +8,8 @@
 
 #include "Board.h"
 
+using namespace std;
+
 Board::Board(Game* g) {
     // randomize the seed
     srand(time(0));
@@ -30,11 +32,63 @@ void Board::generateBoard() {
 }
 
 void Board::wordCheck() {
+    vector<string> words;
     // generate list of all possible words
+    generateWordList(words);
     
     // sort list by length of each word
+    sortWords(words);
     
     // check words against dictionary
+    checkAgainstDictionary(words);
+}
+
+void Board::generateWordList(vector<string> &words) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            // check up
+            findWords(i, j, 0, -1, words);
+            // check down
+            findWords(i, j, 0, 1, words);
+            // check left
+            findWords(i, j, -1, 0, words);
+            // check right
+            findWords(i, j, 1, 0, words);
+            // check diagonal, up, left
+            findWords(i, j, -1, -1, words);
+            // check diagonal, up, right
+            findWords(i, j, 1, -1, words);
+            // check diagonal, down, left
+            findWords(i, j, -1, 1, words);
+            // check diagonal, down, right
+            findWords(i, j, 1, 1, words);
+        }
+    }
+}
+
+void Board::findWords(int row, int col, int d_row, int d_col, vector<string> &words) {
+    int pos = row * col;
+    //words.push_back(FOUND_WORD);
+    //could also use list: words.insert(words.end(), found.begin(), found.end());
+}
+
+// sort by length of string
+// larger strings first
+struct compare {
+    bool operator()(const string& first, const string& second) {
+        return first.size() > second.size();
+    }
+};
+
+void Board::sortWords(vector<string> &words) {
+    compare c;
+    std::sort(words.begin(), words.end(), c);
+}
+
+void Board::checkAgainstDictionary(vector<string> &words) {
+    for (int i = 0; i < words.size(); i++) {
+        
+    }
 }
 
 void Board::removeWord() {

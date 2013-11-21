@@ -33,6 +33,18 @@ public:
     // generate randomized board
     void generateBoard();
     
+    // generate list of words from board
+    void generateWordList(vector<string> &words);
+    
+    // return list of words found in given direction
+    void findWords(int row, int col, int d_row, int d_col, vector<string> &words);
+    
+    // sort words by length, descending
+    void sortWords(vector<string> &words);
+    
+    // check words against dictionary
+    void checkAgainstDictionary(vector<string> &words);
+    
     // check if any words exist
     void wordCheck();
     
