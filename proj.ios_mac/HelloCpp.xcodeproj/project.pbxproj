@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		136EAEBD183B0EBA001AB582 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 136EAEBC183B0EBA001AB582 /* Board.cpp */; };
 		136EAEC1183B1CC2001AB582 /* Letter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 136EAEC0183B1CC2001AB582 /* Letter.cpp */; };
-		136EB146183F2596001AB582 /* dict in Resources */ = {isa = PBXBuildFile; fileRef = 136EB145183F2596001AB582 /* dict */; };
+		136EB148183F3094001AB582 /* dict in Resources */ = {isa = PBXBuildFile; fileRef = 136EB147183F3094001AB582 /* dict */; };
 		1ACB3244164770DE00914215 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ACB3243164770DE00914215 /* libcurl.a */; };
 		1AF4C2F417865DCB00122817 /* libbox2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C2E317865D9500122817 /* libbox2d iOS.a */; };
 		1AF4C2F517865DCB00122817 /* libchipmunk iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C2E117865D9500122817 /* libchipmunk iOS.a */; };
@@ -250,7 +250,7 @@
 		136EAEBC183B0EBA001AB582 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Board.cpp; path = ../Classes/Board.cpp; sourceTree = "<group>"; };
 		136EAEBF183B1CA3001AB582 /* Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Letter.h; path = ../Classes/Letter.h; sourceTree = "<group>"; };
 		136EAEC0183B1CC2001AB582 /* Letter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Letter.cpp; path = ../Classes/Letter.cpp; sourceTree = "<group>"; };
-		136EB145183F2596001AB582 /* dict */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dict; sourceTree = "<group>"; };
+		136EB147183F3094001AB582 /* dict */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dict; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1AF4C2BB17865D9500122817 /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../../../cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
@@ -497,7 +497,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				136EB145183F2596001AB582 /* dict */,
+				136EB147183F3094001AB582 /* dict */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
 				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
@@ -706,7 +706,7 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
-				136EB146183F2596001AB582 /* dict in Resources */,
+				136EB148183F3094001AB582 /* dict in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
 				5087E78017EB970100C73F5D /* Icon-114.png in Resources */,
