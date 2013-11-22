@@ -96,8 +96,7 @@ void Board::findWords(int row, int col, int d_row, int d_col, vector<string> &wo
     }
 }
 
-// sort by length of string
-// larger strings first
+// sort by length of string, descending by length
 struct compare {
     bool operator()(const string& first, const string& second) {
         return first.size() > second.size();
