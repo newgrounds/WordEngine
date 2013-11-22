@@ -14,12 +14,16 @@ using namespace std;
 #include "cocos2d.h"
 #include "Letter.h"
 #include <vector>
+#include <fstream>
 
 class Board
 {
 public:
     // number of letters in row/column
     const static int BOARD_SIZE = 8;
+    
+    // min word size
+    const static int MIN_WORD_SIZE = 4;
     
     // pointer to scene
     Game* game;
@@ -43,7 +47,7 @@ public:
     void sortWords(vector<string> &words);
     
     // check words against dictionary
-    void checkAgainstDictionary(vector<string> &words);
+    void checkAgainstDictionary(vector<string> words, vector<string> &validWords);
     
     // check if any words exist
     void wordCheck();
