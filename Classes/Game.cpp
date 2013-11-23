@@ -70,6 +70,8 @@ bool Game::init()
                 if (location.getDistance(l.posn) < 30) {
                     log("touched %c", l.letter);
                     
+                    l.label->setColor(cocos2d::Color3B(0, 255, 0));
+                    
                     return true;
                 }
             }

@@ -105,7 +105,7 @@ struct compare {
 
 void Board::sortWords(vector<string> &words) {
     compare c;
-    std::sort(words.begin(), words.end(), c);
+    sort(words.begin(), words.end(), c);
 }
 
 void Board::checkAgainstDictionary(vector<string> words, vector<string> &validWords) {
