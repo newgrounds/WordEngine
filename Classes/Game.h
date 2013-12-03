@@ -17,8 +17,23 @@ public:
     // a selector callback
     void menuCloseCallback(Object* pSender);
     
+    // the size of the screen
+    cocos2d::Size screenSize;
+    
     // the score
     float score;
+    
+    // score label
+    cocos2d::LabelTTF* scoreLabel;
+    
+    // update the score
+    void UpdateScore();
+    
+    // number of starting moves
+    const static int STARTING_MOVES = 20;
+    
+    // number of moves
+    int moves;
     
     // list of found words
     vector<string> finalWords;

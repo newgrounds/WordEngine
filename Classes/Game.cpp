@@ -18,19 +18,21 @@ Scene* Game::createScene()
     return scene;
 }
 
+// overloaded == operator for the Letter class
 inline bool operator== (const Letter &l1, const Letter &l2) {
     return l1.letter == l2.letter && l1.row == l2.row && l1.col == l2.col;
 };
 
+// overloaded != operator for the Letter class
 inline bool operator!= (const Letter &l1, const Letter &l2) {
     return !operator==(l1, l2);
 }
 
-// remove selections
-void removeSelections(Board &board, vector<Letter> selections) {
-    for (int i = 0; i < selections.size(); i++) {
-        selections[i].label->setColor(cocos2d::Color3B(255, 255, 255));
-    }
+void Game::UpdateScore() {
+    string scoreText = "Score: ";
+    stringstream stream;
+    stream << scoreText << score;
+    scoreLabel->setString(stream.str().c_str());
 }
 
 // on "init" you need to initialize your instance
@@ -65,6 +67,18 @@ bool Game::init()
     menu->setPosition(Point::ZERO);
     this->addChild(menu, 1);
     
+    // get screen size
+    screenSize = EGLView::getInstance()->getFrameSize();
+    
+    // display score on the screen
+    scoreLabel = LabelTTF::create("Score: 0", "Arial", 24);
+    scoreLabel->setColor(cocos2d::Color3B(255, 255, 255));
+    scoreLabel->setPosition(Point(Letter::PADDING, screenSize.height-Letter::PADDING));
+    this->addChild(scoreLabel, 1);
+    
+    // set number of moves
+    moves = STARTING_MOVES;
+    
     // create board
     Board board = Board(this);
     // whether a letter has been selected
@@ -95,7 +109,9 @@ bool Game::init()
                         // second selected letter is not the same as first
                         cocos2d::log("this fired");
                         board.letterSwap(l);
+                        moves--;
                         letterSelected = false;
+                        UpdateScore();
                     } else {
                         // same letter was selected
                         cocos2d::log("you selected the same letter %c", board.selected.letter);
