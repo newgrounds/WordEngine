@@ -28,6 +28,9 @@ public:
     // pointer to scene
     Game* game;
     
+    // selected letter
+    Letter selected;
+    
     // list of letters
     vector<vector<Letter>> letters;
     
@@ -49,17 +52,17 @@ public:
     // check words against dictionary
     void checkAgainstDictionary(vector<string> words, vector<string> &validWords);
     
-    // check if any words exist
+    // main word loop, check for valid and unique words, add to score
     void wordCheck();
     
-    // remove complete words
-    void removeWord();
+    // check if any of the words have been found previously
+    // add unique words to the uniqueWords vector
+    void uniqueCheck(vector<string> words, vector<string> &uniqueWords);
     
-    // drop letters down
-    void dropLetters();
+    // score words based on 2^(n-4)
+    void scoreWords(vector<string> &uniqueWords);
     
-    // add random letters to empty positions
-    void addLetters();
+    void letterSwap(Letter &l2);
 };
 
 #endif

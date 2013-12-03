@@ -8,11 +8,15 @@
 
 #include "Letter.h"
 
-Letter::Letter(int row, int col) {
-    randomizeLetter(row, col);
+Letter::Letter() {}
+
+Letter::Letter(int r, int c) {
+    row = r;
+    col = c;
+    randomizeLetter();
 }
 
-void Letter::randomizeLetter(int row, int col) {
+void Letter::randomizeLetter() {
     // grab a random int between 0-25
     int n = rand() % 26;
     // convert to a lowercase letter

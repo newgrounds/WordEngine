@@ -43,13 +43,29 @@ void Board::wordCheck() {
     // sort list by length of each word
     sortWords(wordsFound);
     
+    // list of valid words in the board
     vector<string> validWords;
     
     // check words against dictionary
     checkAgainstDictionary(wordsFound, validWords);
     
-    for (int i = 0; i < validWords.size(); i++) {
-        cocos2d::log("valid word: %s", validWords[i].c_str());
+    // list of unique words to count towards the score
+    vector<string> uniqueWords;
+    
+    // check words against previously found words
+    uniqueCheck(validWords, uniqueWords);
+    
+    // score words
+    scoreWords(uniqueWords);
+    
+    // add all unique words to finalWords
+    for (int j = 0; j < uniqueWords.size(); j++) {
+        game->finalWords.push_back(uniqueWords[j]);
+    }
+    
+    // print finalWords
+    for (int i = 0; i < game->finalWords.size(); i++) {
+        cocos2d::log("final word: %s", game->finalWords[i].c_str());
     }
 }
 
@@ -146,22 +162,60 @@ void Board::checkAgainstDictionary(vector<string> words, vector<string> &validWo
     }
 }
 
-void Board::removeWord() {
-    
-}
-
-void Board::dropLetters() {
-    
-}
-
-void Board::addLetters() {
-    for (int i = 0; i < BOARD_SIZE; i++) {
-        vector<Letter> row;
-        for (int j = 0; j < BOARD_SIZE; j++) {
-            // check if pointer to letter is null
-            if (&letters[i][j] == NULL) {
-                //letters[i][j] = Letter(i, j);
-            }
+void Board::uniqueCheck(vector<string> words, vector<string> &uniqueWords) {
+    // loop through the valid words
+    for (int i = 0; i < words.size(); i++) {
+        string word = words[i];
+        if(find(game->finalWords.begin(), game->finalWords.end(), word) != game->finalWords.end()) {
+            // the word is in the list
+            cocos2d::log("'%s' is already in the list", word.c_str());
+        } else {
+            cocos2d::log("added '%s' to the unique words list", word.c_str());
+            // add to uniqueWords
+            uniqueWords.push_back(word);
         }
     }
+}
+
+void Board::scoreWords(vector<string> &uniqueWords) {
+    // loop through all the unique words
+    for (int i = 0; i < uniqueWords.size(); i++) {
+        float s = pow(2, uniqueWords[i].size() - 4);
+        game->score += s;
+        cocos2d::log("size of the word %lu, score %f, total score %f", uniqueWords[i].size(), s, game->score);
+    }
+}
+
+void Board::letterSwap(Letter &l2) {
+    cocos2d::log("swap %c and %c", selected.letter, l2.letter);
+    
+    int row1 = selected.row;
+    int col1 = selected.col;
+    int row2 = l2.row;
+    int col2 = l2.col;
+    
+    // actually swap the letters
+    Letter temp = letters[row1][col1];
+    letters[row1][col1] = letters[row2][col2];
+    letters[row2][col2] = temp;
+    
+    // store new positions
+    letters[row1][col1].row = row1;
+    letters[row1][col1].col = col1;
+    letters[row2][col2].row = row2;
+    letters[row2][col2].col = col2;
+    
+    // reposition the labels
+    letters[row1][col1].posn = cocos2d::Point(240+(row1*Letter::PADDING), 240+(col1*Letter::PADDING));
+    letters[row1][col1].label->setPosition(letters[row1][col1].posn);
+    letters[row2][col2].posn = cocos2d::Point(240+(row2*Letter::PADDING), 240+(col2*Letter::PADDING));
+    letters[row2][col2].label->setPosition(letters[row2][col2].posn);
+    
+    selected.label->setColor(cocos2d::Color3B(255, 255, 255));
+    l2.label->setColor(cocos2d::Color3B(255, 255, 255));
+    
+    // reset the selected letter to an empty letter
+    selected = Letter();
+    
+    wordCheck();
 }

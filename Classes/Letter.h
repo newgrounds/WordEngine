@@ -21,15 +21,21 @@ public:
     // position on screen
     cocos2d::Point posn;
     
+    // row and col on board
+    int row, col;
+    
+    // the letter
     char letter;
     
+    // the label
     cocos2d::LabelTTF* label;
     
     // constructor
-    Letter(int row, int col);
+    Letter(int r, int c);
+    Letter();
     
     // pick a random letter and create the label
-    void randomizeLetter(int row, int col);
+    void randomizeLetter();
 };
 
 #endif

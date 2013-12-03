@@ -10,73 +10,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/Letter.cpp"
-            timestampString = "406574401.023118"
+            timestampString = "407703350.255387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "Letter::randomizeLetter(int row, int col)"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "Letter::randomizeLetter()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Classes/Board.cpp"
-            timestampString = "406797009.232417"
+            filePath = "../Classes/Game.cpp"
+            timestampString = "407740828.641585"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "Board::addLetters()"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "Game::init()"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Board::addLetters()"
-                  moduleName = "WordEngine iOS"
-                  urlString = "file:///Users/adamgressen/cocos2d-x-3.0alpha0/projects/WordEngine/Classes/Board.cpp"
-                  timestampString = "406797009.576682"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "170">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Board::addLetters()"
-                  moduleName = "WordEngine iOS"
-                  urlString = "file:///Users/adamgressen/cocos2d-x-3.0alpha0/projects/WordEngine/Classes/Board.cpp"
-                  timestampString = "406797009.577132"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "206">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Board::addLetters()"
-                  moduleName = "WordEngine iOS"
-                  urlString = "file:///Users/adamgressen/cocos2d-x-3.0alpha0/projects/WordEngine/Classes/Board.cpp"
-                  timestampString = "406797009.57752"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "162"
-                  endingLineNumber = "162"
-                  offsetFromSymbolStart = "234">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/Game.cpp"
+            timestampString = "407741639.632747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "Game::init()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

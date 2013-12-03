@@ -18,11 +18,24 @@ Scene* Game::createScene()
     return scene;
 }
 
+inline bool operator== (const Letter &l1, const Letter &l2) {
+    return l1.letter == l2.letter && l1.row == l2.row && l1.col == l2.col;
+};
+
+inline bool operator!= (const Letter &l1, const Letter &l2) {
+    return !operator==(l1, l2);
+}
+
+// remove selections
+void removeSelections(Board &board, vector<Letter> selections) {
+    for (int i = 0; i < selections.size(); i++) {
+        selections[i].label->setColor(cocos2d::Color3B(255, 255, 255));
+    }
+}
+
 // on "init" you need to initialize your instance
 bool Game::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Layer::init() )
     {
         return false;
@@ -51,16 +64,16 @@ bool Game::init()
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Point::ZERO);
     this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
+    
+    // create board
     Board board = Board(this);
+    // whether a letter has been selected
+    bool letterSelected = false;
     
     auto listener = EventListenerTouch::create(Touch::DispatchMode::ONE_BY_ONE);
     listener->setSwallowTouches(true);
-    listener->onTouchBegan = [=](Touch* touch, Event* event) {
-        log("touch began");
+    listener->onTouchBegan = [=](Touch* touch, Event* event) mutable {
+        //log("touch began");
         Point location = touch->getLocation();//->getLocationInView();
         // TODO: Detect touches on labels
         for (int i = 0; i < Board::BOARD_SIZE; i++) {
@@ -72,15 +85,40 @@ bool Game::init()
                     
                     l.label->setColor(cocos2d::Color3B(0, 255, 0));
                     
+                    cocos2d::log("letter selected %s, %c", letterSelected ? "true" : "false", board.selected.letter);
+                    if (!letterSelected) {
+                        // first letter selected
+                        board.selected = l;
+                        letterSelected = true;
+                        cocos2d::log("set selected to %c, %s", board.selected.letter, letterSelected ? "true" : "false");
+                    } else if (board.selected != l) {
+                        // second selected letter is not the same as first
+                        cocos2d::log("this fired");
+                        board.letterSwap(l);
+                        letterSelected = false;
+                    } else {
+                        // same letter was selected
+                        cocos2d::log("you selected the same letter %c", board.selected.letter);
+                        // set letterSelected to false
+                        letterSelected = false;
+                        // reset selected color
+                        board.selected.label->setColor(cocos2d::Color3B(255, 255, 255));
+                        // set selected letter to empty Letter
+                        board.selected = Letter();
+                    }
+                    
                     return true;
                 }
             }
         }
         return true;
     };
-    listener->onTouchMoved = [](Touch* touch, Event* event) { log("touch moved"); };
-    listener->onTouchEnded = [](Touch* touch, Event* event) { log("touch ended"); };
-    listener->onTouchCancelled = [](Touch* touch, Event* event) { log("touch canceled"); };
+    
+    // unused listeners
+    //listener->onTouchMoved = [](Touch* touch, Event* event) { log("touch moved"); };
+    //listener->onTouchEnded = [](Touch* touch, Event* event) { log("touch ended"); };
+    //listener->onTouchCancelled = [](Touch* touch, Event* event) { log("touch canceled"); };
+    
     // The priority of the touch listener is based on the draw order of sprite
     //EventDispatcher::getInstance()->addEventListenerWithSceneGraphPriority(listener, sprite);
     // Or the priority of the touch listener is a fixed value
@@ -88,7 +126,6 @@ bool Game::init()
     
     return true;
 }
-
 
 void Game::menuCloseCallback(Object* pSender)
 {
