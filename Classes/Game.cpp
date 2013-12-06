@@ -1,10 +1,11 @@
 #include "Game.h"
 #include "Board.h"
+#include "EndGame.h"
+#include "MainMenu.h"
 
 USING_NS_CC;
 
-Scene* Game::createScene()
-{
+Scene* Game::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
@@ -29,17 +30,34 @@ inline bool operator!= (const Letter &l1, const Letter &l2) {
 }
 
 void Game::UpdateScore() {
-    string scoreText = "Score: ";
     stringstream stream;
-    stream << scoreText << score;
+    stream << "Score: " << score;
     scoreLabel->setString(stream.str().c_str());
+    scoreLabel->setPositionX(scoreLabel->getContentSize().width/2);
+}
+
+void Game::UpdateMoves() {
+    // decrement moves
+    moves--;
+    // update moves label
+    stringstream stream;
+    stream << "Moves: " << moves;
+    movesLabel->setString(stream.str().c_str());
+    movesLabel->setPositionX(Director::getInstance()->getVisibleSize().width - movesLabel->getContentSize().width);
+    // check for game over
+    GameOverCheck();
+}
+
+void Game::GameOverCheck() {
+    // this should never go below 0, but just in case let's use <=
+    if (moves <= 0) {
+        Director::getInstance()->replaceScene(EndGame::createScene());
+    }
 }
 
 // on "init" you need to initialize your instance
-bool Game::init()
-{
-    if ( !Layer::init() )
-    {
+bool Game::init() {
+    if ( !LayerColor::initWithColor(Color4B(255, 0, 0, 255)) ) {
         return false;
     }
     
@@ -48,31 +66,27 @@ bool Game::init()
     
     // get screen size
     Size screenSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(Game::menuCloseCallback, this));
-    
-	closeItem->setPosition(Point(origin.x + screenSize.width - closeItem->getContentSize().width/2 ,
-                                origin.y + closeItem->getContentSize().height/2));
-
+    // add menu button
+    MenuItemLabel* menuItem = MainMenu::createButton("End Game", CC_CALLBACK_1(Game::menuCallback, this));
+	menuItem->setPosition(Point(screenSize.width - menuItem->getContentSize().width/2 - Letter::PADDING,
+                                menuItem->getContentSize().height/2 + Letter::PADDING));
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
+    auto menu = Menu::create(menuItem, NULL);
     menu->setPosition(Point::ZERO);
     this->addChild(menu, 1);
     
     // display score on the screen
-    scoreLabel = LabelTTF::create("Score: 0", "Arial", 24);
-    scoreLabel->setColor(cocos2d::Color3B(255, 255, 255));
-    scoreLabel->setPosition(Point(Letter::PADDING, screenSize.height-Letter::PADDING));
+    scoreLabel = LabelTTF::create("Score: 0", "Arial", 35);
+    scoreLabel->setColor(Color3B(255, 255, 255));
+    scoreLabel->setPosition(Point(Letter::PADDING + scoreLabel->getContentSize().width/2, screenSize.height-scoreLabel->getContentSize().height/2 - Letter::PADDING));
     this->addChild(scoreLabel, 1);
+    
+    // display moves on the screen
+    movesLabel = LabelTTF::create("Moves: 20", "Arial", 35);
+    movesLabel->setColor(Color3B(255, 255, 255));
+    movesLabel->setPosition(Point(screenSize.width - movesLabel->getContentSize().width/2 - Letter::PADDING, screenSize.height - movesLabel->getContentSize().height/2 - Letter::PADDING));
+    this->addChild(movesLabel, 1);
     
     // set number of moves
     moves = STARTING_MOVES;
@@ -83,7 +97,7 @@ bool Game::init()
     bool letterSelected = false;
     
     auto listener = EventListenerTouch::create(Touch::DispatchMode::ONE_BY_ONE);
-    listener->setSwallowTouches(true);
+    listener->setSwallowTouches(false);
     listener->onTouchBegan = [=](Touch* touch, Event* event) mutable {
         //log("touch began");
         Point location = touch->getLocation();//->getLocationInView();
@@ -93,26 +107,25 @@ bool Game::init()
             for (int j = 0; j < Board::BOARD_SIZE; j++) {
                 Letter l = row[j];
                 if (location.getDistance(l.posn) < 30) {
-                    log("touched %c", l.letter);
+                    //log("touched %c", l.letter);
                     
                     l.label->setColor(cocos2d::Color3B(0, 255, 0));
                     
-                    cocos2d::log("letter selected %s, %c", letterSelected ? "true" : "false", board.selected.letter);
+                    //cocos2d::log("letter selected %s, %c", letterSelected ? "true" : "false", board.selected.letter);
                     if (!letterSelected) {
                         // first letter selected
                         board.selected = l;
                         letterSelected = true;
-                        cocos2d::log("set selected to %c, %s", board.selected.letter, letterSelected ? "true" : "false");
+                        //cocos2d::log("set selected to %c, %s", board.selected.letter, letterSelected ? "true" : "false");
                     } else if (board.selected != l) {
                         // second selected letter is not the same as first
-                        cocos2d::log("this fired");
                         board.letterSwap(l);
-                        moves--;
                         letterSelected = false;
                         UpdateScore();
+                        UpdateMoves();
                     } else {
                         // same letter was selected
-                        cocos2d::log("you selected the same letter %c", board.selected.letter);
+                        //cocos2d::log("you selected the same letter %c", board.selected.letter);
                         // set letterSelected to false
                         letterSelected = false;
                         // reset selected color
@@ -125,7 +138,7 @@ bool Game::init()
                 }
             }
         }
-        return true;
+        return false;
     };
     
     // unused listeners
@@ -141,11 +154,6 @@ bool Game::init()
     return true;
 }
 
-void Game::menuCloseCallback(Object* pSender)
-{
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+void Game::menuCallback(Object* pSender) {
+    Director::getInstance()->replaceScene(EndGame::createScene());
 }

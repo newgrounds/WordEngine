@@ -5,7 +5,7 @@ using namespace std;
 #include "cocos2d.h"
 #include <vector>
 
-class Game : public cocos2d::Layer
+class Game : public cocos2d::LayerColor
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -15,7 +15,7 @@ public:
     virtual bool init();
     
     // a selector callback
-    void menuCloseCallback(Object* pSender);
+    void menuCallback(Object* pSender);
     
     // the score
     float score;
@@ -26,11 +26,20 @@ public:
     // update the score
     void UpdateScore();
     
+    // check if the game is over
+    void GameOverCheck();
+    
     // number of starting moves
     const static int STARTING_MOVES = 20;
     
     // number of moves
     int moves;
+    
+    // moves label
+    cocos2d::LabelTTF* movesLabel;
+    
+    // update the moves
+    void UpdateMoves();
     
     // list of found words
     vector<string> finalWords;

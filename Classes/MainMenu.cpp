@@ -12,8 +12,7 @@
 
 USING_NS_CC;
 
-Scene* MainMenu::createScene()
-{
+Scene* MainMenu::createScene() {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
@@ -28,50 +27,40 @@ Scene* MainMenu::createScene()
 }
 
 // create labels
-MenuItemLabel* createMenuItem(string name, const ccMenuCallback &callback) {
+MenuItemLabel* MainMenu::createButton(string name, const ccMenuCallback &callback) {
     LabelTTF* lab = LabelTTF::create(name.c_str(), "Arial", 35);
     return MenuItemLabel::create(lab, callback);
 }
 
 // on "init" you need to initialize your instance
-bool MainMenu::init()
-{
-    if ( !Layer::init() )
-    {
+bool MainMenu::init() {
+    if ( !Layer::init() ) {
         return false;
     }
     
-    // get screen size
-    Size screenSize = Director::getInstance()->getVisibleSize();
-    Point origin = Director::getInstance()->getVisibleOrigin();
-    
     // add a button to start the game
-    MenuItemLabel* startItem = createMenuItem("Start", CC_CALLBACK_1(MainMenu::startGameCallback, this));
+    MenuItemLabel* startItem = createButton("New Game", CC_CALLBACK_1(MainMenu::startGameCallback, this));
     
     // add a button to exit the app
-    MenuItemLabel* exitItem = createMenuItem("Exit", CC_CALLBACK_1(MainMenu::exitCallback, this));
-    
-    // position menu items
-    startItem->setPosition(Point(origin.x + (screenSize.width/2),
-                                 origin.y + (screenSize.height/2) - startItem->getContentSize().height/2));
-    exitItem->setPosition(Point(origin.x + (screenSize.width/2),
-                                origin.y + (screenSize.height/2) - startItem->getContentSize().height - exitItem->getContentSize().height/2));
+    MenuItemLabel* exitItem = createButton("Exit", CC_CALLBACK_1(MainMenu::exitCallback, this));
     
     // create menu, it's an autorelease object
     auto menu = Menu::create(startItem, exitItem, NULL);
-    menu->setPosition(Point::ZERO);
+    //menu->setPosition(Point::ZERO);
+    menu->alignItemsVertically();
     this->addChild(menu, 1);
     
     return true;
 }
 
-void MainMenu::startGameCallback(Object* pSender)
-{
+void MainMenu::startGameCallback(Object* pSender) {
     Director::getInstance()->replaceScene(Game::createScene());
 }
 
-void MainMenu::exitCallback(Object* pSender)
-{
+void MainMenu::exitCallback(Object* pSender) {
     Director::getInstance()->end();
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
+#endif
 }

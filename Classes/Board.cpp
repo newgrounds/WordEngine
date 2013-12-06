@@ -206,9 +206,9 @@ void Board::letterSwap(Letter &l2) {
     letters[row2][col2].col = col2;
     
     // reposition the labels
-    letters[row1][col1].posn = cocos2d::Point(240+(row1*Letter::PADDING), 240+(col1*Letter::PADDING));
+    letters[row1][col1].posn = Letter::positionLetter(row1, col1);
     letters[row1][col1].label->setPosition(letters[row1][col1].posn);
-    letters[row2][col2].posn = cocos2d::Point(240+(row2*Letter::PADDING), 240+(col2*Letter::PADDING));
+    letters[row2][col2].posn = Letter::positionLetter(row2, col2);
     letters[row2][col2].label->setPosition(letters[row2][col2].posn);
     
     selected.label->setColor(cocos2d::Color3B(255, 255, 255));
@@ -217,5 +217,6 @@ void Board::letterSwap(Letter &l2) {
     // reset the selected letter to an empty letter
     selected = Letter();
     
+    // run word check
     wordCheck();
 }

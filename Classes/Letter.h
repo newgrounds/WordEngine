@@ -16,7 +16,7 @@ using namespace std;
 class Letter
 {
 public:
-    const static int PADDING = 50;
+    const static int PADDING = 20;
     
     // position on screen
     cocos2d::Point posn;
@@ -36,6 +36,9 @@ public:
     
     // pick a random letter and create the label
     void randomizeLetter();
+    
+    // position Letter
+    static cocos2d::Point positionLetter(int r, int c);
 };
 
 #endif
