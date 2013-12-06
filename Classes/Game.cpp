@@ -46,7 +46,8 @@ bool Game::init()
     // enable touch events
     setTouchEnabled(true);
     
-    Size visibleSize = Director::getInstance()->getVisibleSize();
+    // get screen size
+    Size screenSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin();
 
     /////////////////////////////
@@ -59,16 +60,13 @@ bool Game::init()
                                            "CloseSelected.png",
                                            CC_CALLBACK_1(Game::menuCloseCallback, this));
     
-	closeItem->setPosition(Point(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
+	closeItem->setPosition(Point(origin.x + screenSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
 
     // create menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Point::ZERO);
     this->addChild(menu, 1);
-    
-    // get screen size
-    screenSize = EGLView::getInstance()->getFrameSize();
     
     // display score on the screen
     scoreLabel = LabelTTF::create("Score: 0", "Arial", 24);

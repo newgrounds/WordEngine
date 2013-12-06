@@ -1,5 +1,5 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __GAME_H__
+#define __GAME_H__
 
 using namespace std;
 #include "cocos2d.h"
@@ -16,9 +16,6 @@ public:
     
     // a selector callback
     void menuCloseCallback(Object* pSender);
-    
-    // the size of the screen
-    cocos2d::Size screenSize;
     
     // the score
     float score;
