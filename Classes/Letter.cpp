@@ -17,7 +17,7 @@ Letter::Letter(int r, int c) {
 }
 
 cocos2d::Point Letter::positionLetter(int r, int c) {
-    return cocos2d::Point((r+6)*(cocos2d::Director::getInstance()->getVisibleSize().width/18),
+    return cocos2d::Point((r+5)*(cocos2d::Director::getInstance()->getVisibleSize().width/18),
                           (c+3)*(cocos2d::Director::getInstance()->getVisibleSize().height/12));
 }
 

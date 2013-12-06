@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "EndGame.h"
 #include "MainMenu.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 
@@ -33,7 +34,7 @@ void Game::UpdateScore() {
     stringstream stream;
     stream << "Score: " << score;
     scoreLabel->setString(stream.str().c_str());
-    scoreLabel->setPositionX(scoreLabel->getContentSize().width/2);
+    scoreLabel->setPositionX(Letter::PADDING + scoreLabel->getContentSize().width/2);
 }
 
 void Game::UpdateMoves() {
@@ -43,7 +44,7 @@ void Game::UpdateMoves() {
     stringstream stream;
     stream << "Moves: " << moves;
     movesLabel->setString(stream.str().c_str());
-    movesLabel->setPositionX(Director::getInstance()->getVisibleSize().width - movesLabel->getContentSize().width);
+    movesLabel->setPositionX(Director::getInstance()->getVisibleSize().width - movesLabel->getContentSize().width/2 - Letter::PADDING);
     // check for game over
     GameOverCheck();
 }
@@ -60,6 +61,9 @@ bool Game::init() {
     if ( !LayerColor::initWithColor(Color4B(255, 0, 0, 255)) ) {
         return false;
     }
+    
+    // add background music
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("action.mp3", true);
     
     // enable touch events
     setTouchEnabled(true);
@@ -156,4 +160,5 @@ bool Game::init() {
 
 void Game::menuCallback(Object* pSender) {
     Director::getInstance()->replaceScene(EndGame::createScene());
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1313B5621850FA3D00161B66 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1313B5611850FA3D00161B66 /* MainMenu.cpp */; };
 		1313B5651851A39100161B66 /* EndGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1313B5641851A39100161B66 /* EndGame.cpp */; };
+		1313B5691852995200161B66 /* action.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1313B5681852995200161B66 /* action.mp3 */; };
 		136EAEBD183B0EBA001AB582 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 136EAEBC183B0EBA001AB582 /* Board.cpp */; };
 		136EAEC1183B1CC2001AB582 /* Letter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 136EAEC0183B1CC2001AB582 /* Letter.cpp */; };
 		136EB148183F3094001AB582 /* dict in Resources */ = {isa = PBXBuildFile; fileRef = 136EB147183F3094001AB582 /* dict */; };
@@ -252,6 +253,7 @@
 		1313B5611850FA3D00161B66 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenu.cpp; path = ../Classes/MainMenu.cpp; sourceTree = "<group>"; };
 		1313B5631851A1A800161B66 /* EndGame.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EndGame.h; path = ../Classes/EndGame.h; sourceTree = "<group>"; };
 		1313B5641851A39100161B66 /* EndGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EndGame.cpp; path = ../Classes/EndGame.cpp; sourceTree = "<group>"; };
+		1313B5681852995200161B66 /* action.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = action.mp3; sourceTree = "<group>"; };
 		136EAEB5183B0AF9001AB582 /* Board.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Board.h; path = ../Classes/Board.h; sourceTree = "<group>"; };
 		136EAEBC183B0EBA001AB582 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Board.cpp; path = ../Classes/Board.cpp; sourceTree = "<group>"; };
 		136EAEBF183B1CA3001AB582 /* Letter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Letter.h; path = ../Classes/Letter.h; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1313B5681852995200161B66 /* action.mp3 */,
 				136EB147183F3094001AB582 /* dict */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
@@ -716,6 +719,7 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				5087E78517EB970100C73F5D /* Icon-72.png in Resources */,
+				1313B5691852995200161B66 /* action.mp3 in Resources */,
 				136EB148183F3094001AB582 /* dict in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
 				50EF62A317ECD613001EB2F8 /* Icon-50.png in Resources */,
