@@ -53,12 +53,13 @@ void Game::GameOverCheck() {
     // this should never go below 0, but just in case let's use <=
     if (moves <= 0) {
         Director::getInstance()->replaceScene(EndGame::createScene());
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     }
 }
 
 // on "init" you need to initialize your instance
 bool Game::init() {
-    if ( !LayerColor::initWithColor(Color4B(255, 0, 0, 255)) ) {
+    if ( !LayerColor::init()) {//initWithColor(Color4B(255, 0, 0, 255)) ) {
         return false;
     }
     

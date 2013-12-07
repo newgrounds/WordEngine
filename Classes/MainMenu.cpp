@@ -9,6 +9,7 @@
 #include "MainMenu.h"
 #include "Game.h"
 #include "cocos2d.h"
+#include "Letter.h"
 
 USING_NS_CC;
 
@@ -37,6 +38,12 @@ bool MainMenu::init() {
     if ( !Layer::init() ) {
         return false;
     }
+    
+    // add title label
+    LabelTTF* titleLabel = LabelTTF::create("Word Engine", "Arial", 50);
+    titleLabel->setPosition(Point(Director::getInstance()->getVisibleSize().width/2,
+                                  Director::getInstance()->getVisibleSize().height - titleLabel->getContentSize().height/2 - Letter::PADDING));
+    this->addChild(titleLabel, 1);
     
     // add a button to start the game
     MenuItemLabel* startItem = createButton("New Game", CC_CALLBACK_1(MainMenu::startGameCallback, this));
