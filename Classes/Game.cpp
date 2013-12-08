@@ -54,6 +54,7 @@ void Game::GameOverCheck() {
     if (moves <= 0) {
         Director::getInstance()->replaceScene(EndGame::createScene());
         CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+        EventDispatcher::getInstance()->removeAllListeners();
     }
 }
 
@@ -162,4 +163,5 @@ bool Game::init() {
 void Game::menuCallback(Object* pSender) {
     Director::getInstance()->replaceScene(EndGame::createScene());
     CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+    EventDispatcher::getInstance()->removeAllListeners();
 }
