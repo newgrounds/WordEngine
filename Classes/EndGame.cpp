@@ -7,10 +7,18 @@
 //
 
 #include "EndGame.h"
+#include "cocos-ext.h"
 
 USING_NS_CC;
+using cocos2d::extension::UIListView;
 
-Scene* EndGame::createScene() {
+float EndGame::score = 0;
+vector<string> EndGame::words = vector<string>();
+
+Scene* EndGame::createScene(float s, vector<string> w) {
+    score = s;
+    words = w;
+    
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
@@ -46,15 +54,26 @@ bool EndGame::init() {
     menuItem->setPosition(Point(origin.x + (screenSize.width/2) + menuItem->getContentSize().width,
                                 origin.y + menuItem->getContentSize().height));
     
-    // display the final score
+    // stringstream to create labels
+    stringstream stream;
     
+    // display the final score
+    stream << "Score: " << score;
+    MenuItemLabel* scoreLabel = MainMenu::createLabel(stream.str().c_str());
+    stream.str("");
     
     // display the number of words
+    stream << "# of words: " << words.size();
+    MenuItemLabel* numWordsLabel = MainMenu::createLabel(stream.str().c_str());
     
+    // display the words
+    //UIListView *listView = UIListView::create();
+    //listView->initChildWithDataLength(10);
     
     // create menu, it's an autorelease object
-    auto menu = Menu::create(restartItem, menuItem, NULL);
-    menu->setPosition(Point::ZERO);
+    auto menu = Menu::create(scoreLabel, numWordsLabel, restartItem, menuItem, NULL);
+    //menu->setPosition(Point::ZERO);
+    menu->alignItemsVertically();
     this->addChild(menu, 1);
     
     return true;

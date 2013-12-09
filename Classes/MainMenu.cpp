@@ -27,7 +27,11 @@ Scene* MainMenu::createScene() {
     return scene;
 }
 
-// create labels
+MenuItemLabel* MainMenu::createLabel(string name) {
+    LabelTTF* lab = LabelTTF::create(name.c_str(), "Arial", 35);
+    return MenuItemLabel::create(lab);
+}
+
 MenuItemLabel* MainMenu::createButton(string name, const ccMenuCallback &callback) {
     LabelTTF* lab = LabelTTF::create(name.c_str(), "Arial", 35);
     return MenuItemLabel::create(lab, callback);

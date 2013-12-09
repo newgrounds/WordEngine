@@ -52,7 +52,7 @@ void Game::UpdateMoves() {
 void Game::GameOverCheck() {
     // this should never go below 0, but just in case let's use <=
     if (moves <= 0) {
-        Director::getInstance()->replaceScene(EndGame::createScene());
+        Director::getInstance()->replaceScene(EndGame::createScene(score, finalWords));
         CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
         EventDispatcher::getInstance()->removeAllListeners();
     }
@@ -161,7 +161,7 @@ bool Game::init() {
 }
 
 void Game::menuCallback(Object* pSender) {
-    Director::getInstance()->replaceScene(EndGame::createScene());
+    Director::getInstance()->replaceScene(EndGame::createScene(score, finalWords));
     CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
     EventDispatcher::getInstance()->removeAllListeners();
 }
