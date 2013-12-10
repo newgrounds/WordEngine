@@ -24,6 +24,9 @@ public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
     
+    // padding for listview
+    static const int LV_PAD = 100;
+    
     // callback that starts the game
     void restartGameCallback(Object* pSender);
     

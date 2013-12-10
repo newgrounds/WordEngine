@@ -72,17 +72,17 @@ bool EndGame::init() {
     
     // create listview to display the words
     UIListView *listView = UIListView::create();
-    // set the size of the list for the listview
-    listView->initChildWithDataLength(words.size());
     // set the listview's physical size
-    listView->setSize(Size(screenSize.width, screenSize.height));
+    listView->setSize(Size(screenSize.width, screenSize.height - (LV_PAD * 2)));
+    // position the listview
+    listView->setPosition(Point(0, LV_PAD));
     // set the z-order of the listview
     //listView->setZOrder(100);
     // set the listview bg color
     //listView->setBackGroundColor(cocos2d::Color3B(50, 50, 50));
     
     // set initial label position
-    Point labPosn = Point(screenSize.width/2, numWordsLabel->getPositionY() - numWordsLabel->getContentSize().height - Letter::PADDING);
+    Point labPosn = Point(screenSize.width/2, numWordsLabel->getPositionY() - numWordsLabel->getContentSize().height - Letter::PADDING - LV_PAD);
     for (int i = 0; i < words.size(); i++) {
         UILabel* lab = UILabel::create();
         lab->setFontSize(28);
@@ -95,11 +95,14 @@ bool EndGame::init() {
         // update label position for the next label
         labPosn = Point(labPosn.x, labPosn.y - lab->getContentSize().height);
     }
+    // set child data length to avoid crash during touch events
+    listView->initChildWithDataLength(words.size());
     
     // create UILayer to hold the listview
     UILayer* labelLayer = UILayer::create();
     labelLayer->init();
     labelLayer->addWidget(listView);
+    //labelLayer->setTouchEnabled(false);
     this->addChild(labelLayer, 100);
     
     // create menu, it's an autorelease object
