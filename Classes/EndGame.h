@@ -11,6 +11,7 @@
 
 using namespace std;
 #include "cocos2d.h"
+#include "cocos-ext.h"
 #include "MainMenu.h"
 #include "Game.h"
 
